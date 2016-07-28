@@ -20,7 +20,10 @@ app.post('/get-file-size', upload.single('file'), (request, response) => {
   const file = request.file;
 
   response.json({
-    size: file.size
+    size: file.size,
+    name: file.originalname,
+    encoding: file.encoding,
+    mimetype: file.mimetype
   })
 })
 
