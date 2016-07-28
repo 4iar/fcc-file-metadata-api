@@ -19,12 +19,17 @@ app.get('/', (request, response) => {
 app.post('/get-file-size', upload.single('file'), (request, response) => {
   const file = request.file;
 
-  response.json({
-    size: file.size,
-    name: file.originalname,
-    encoding: file.encoding,
-    mimetype: file.mimetype
-  })
+  if (file) {
+    response.json({
+      size: file.size,
+      name: file.originalname,
+      encoding: file.encoding,
+      mimetype: file.mimetype
+    });
+  } else {
+    response.json({error: "could not read file"});
+  }
+
 })
 
 app.listen(port);
